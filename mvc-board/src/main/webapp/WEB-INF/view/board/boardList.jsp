@@ -13,5 +13,28 @@
 			<a href="">${m.localName}(${m.cnt})</a>
 		</c:forEach>
 	</div>
+	<table border="1">
+		<tr>
+			<th>player</th>
+			<th>boardTitle</th>
+			<th>memberId</th>
+			<th>createdate</th>
+		</tr>
+			<c:forEach var="b" items="${boardList}">
+				<tr>
+					<td>${b.localName}</td>
+					<td><a href="/board/boardOne?boardNo=${b.boardNo}">${b.boardTitle}</a></td>
+					<td>${b.memberId}</td>
+					<td>${b.createdate}</td>
+				</tr>
+			</c:forEach>
+	</table>
+	<c:if test="${currentPage > 1}">
+		<a href="/board/boardList?currentPage=${currentPage-1}">이전</a>
+	</c:if>
+	<span>${currentPage}</span>
+	<c:if test="${currentPage < lastPage}">
+		<a href="/board/boardList?currentPage=${currentPage+1}">다음</a>
+	</c:if>
 </body>
 </html>
