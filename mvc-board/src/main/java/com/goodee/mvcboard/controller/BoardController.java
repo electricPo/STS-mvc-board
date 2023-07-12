@@ -1,20 +1,38 @@
 package com.goodee.mvcboard.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodee.mvcboard.service.BoardService;
+import com.goodee.mvcboard.vo.Board;
 
+import lombok.extern.slf4j.Slf4j;
+@Slf4j
 @Controller
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
+
+	//폼
+	@GetMapping("/board/addBoard")
+	public String addBoard() {
+		return"/board/addBoard";
+	}
+	
+	//액션
+	//커맨드 객체
+	@PostMapping("/board/addBoard")
+	public String addBoard(Board board) {
+		int row = boardService.addBoard(board);
+		log.debug("\u001B[46m" + "row :" + row + "\u001B[0m");
+		return "redirect:/board/boardList";
+	}
 	
 	@GetMapping("/board/boardList")
 	//@RequestParam 형변환, null값 선언 안해도 된다

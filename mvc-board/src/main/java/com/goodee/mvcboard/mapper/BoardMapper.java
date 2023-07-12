@@ -9,6 +9,16 @@ import com.goodee.mvcboard.vo.Board;
 
 @Mapper
 public interface BoardMapper {
+	//delete문
+	int deleteBoard(Board board);
+	
+	//delete문
+	int updatedBoard(Board board);
+	
+	//insert문
+	//interface의 추상 메서드
+	int insertBoard(Board board);
+	
 	//local_name컬럼과 count() 반환 -> 글자, 숫자 리스트
 	List<Map<String, Object>> selectLocalNameList(); //추상메서드
 	//마이바티스 메서드는 매개값을 하나만 허용

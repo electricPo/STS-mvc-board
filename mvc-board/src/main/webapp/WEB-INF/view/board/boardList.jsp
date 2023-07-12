@@ -9,6 +9,10 @@
 <body>
 	<h1>FANDOM WITH FANS</h1>
 	<div>
+		<a href="/board/addBoard">게시글 입력</a>
+	</div>
+	
+	<div>
 		<c:forEach var="m" items="${localNameList}"> <!--형변환이 자동으로 들어간다  -->
 			<a href="">${m.localName}(${m.cnt})</a>
 		</c:forEach>

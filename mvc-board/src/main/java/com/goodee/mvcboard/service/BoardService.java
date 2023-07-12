@@ -16,6 +16,21 @@ import com.goodee.mvcboard.vo.Board;
 public class BoardService {
 	@Autowired
 	private BoardMapper boardMapper; //boardservice의 필드값을 채운다
+	//게시글 수정
+	public int updateBoard(Board board) {
+		return boardMapper.updatedBoard(board);
+	}
+	
+	//게시글 삭제
+	public int deleteBoard(Board board) {
+		return boardMapper.deleteBoard(board);
+	}
+	
+	//게시글입력
+	public int addBoard(Board board) {
+		return boardMapper.insertBoard(board);
+	}
+	//페이징
 	public Map<String, Object> getBoardList(int currentPage, int rowPerPage){
 		
 		//service layer의 역할 1 : 컨트롤러가 넘겨준 매개값을 dao의 매개값에 맞게 가공한다
