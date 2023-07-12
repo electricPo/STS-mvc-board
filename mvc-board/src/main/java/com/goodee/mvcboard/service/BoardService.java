@@ -22,13 +22,13 @@ public class BoardService {
 	}
 	
 	//게시글 수정
-	public int updateBoard(Board board) {
-		return boardMapper.updatedBoard(board);
+	public int modifyBoard(Board board) {
+		return boardMapper.modifyBoard(board);
 	}
 	
 	//게시글 삭제
-	public int deleteBoard(Board board) {
-		return boardMapper.deleteBoard(board);
+	public int removeBoard(Board board) {
+		return boardMapper.removeBoard(board);
 	}
 	
 	//게시글입력

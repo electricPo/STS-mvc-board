@@ -13,10 +13,10 @@ public interface BoardMapper {
 	Board boardOne(Board board);
 	
 	//delete문
-	int deleteBoard(Board board);
+	int removeBoard(Board board);
 	
 	//delete문
-	int updatedBoard(Board board);
+	int modifyBoard(Board board);
 	
 	//insert문
 	//interface의 추상 메서드

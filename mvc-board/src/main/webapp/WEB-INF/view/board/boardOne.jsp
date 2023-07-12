@@ -9,8 +9,8 @@
 <body>
 	<c:set var="b" value="${board}"></c:set>
 	<h1>게시글 상세 보기</h1>
-	<a href="">수정</a>
-	<a href="">삭제</a>
+	<a href="${pageContext.request.contextPath}/board/modifyBoard?boardNo=${b.boardNo}">수정</a>
+	<a href="${pageContext.request.contextPath}/board/removeBoard?boardNo=${b.boardNo}">삭제</a>
 	
 	<table>
 		<tr>

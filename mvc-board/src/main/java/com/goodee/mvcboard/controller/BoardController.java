@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodee.mvcboard.service.BoardService;
@@ -18,10 +20,77 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
+	//게시긁 삭제 폼
+	@GetMapping("board/removeBoard")
+	public String removeBoard(Model model,
+								@RequestParam(name = "boardNo") int boardNo) {
+		//board 값 셋팅
+		Board board = new Board();
+		board.setBoardNo(boardNo);
+		board=boardService.boardOne(board);
+		
+		model.addAttribute("board", board);
+		
+		return "/board/removeBoard";
+	}
+	
+	
+	//게시글 삭제 액션
+	@PostMapping("board/removeBoard")
+	public String removeBoard(
+							@RequestParam(name = "boardNo") int boardNo,
+							@RequestParam(name = "memberId") String memberId) {
+		//board 값 셋팅
+				Board board = new Board();
+				board.setBoardNo(boardNo);
+				board.setMemberId(memberId);
+				int row = boardService.removeBoard(board);
+		
+		return "redirect:/board/boardList";
+		
+	}
+	
+	//게시글 수정 폼
+	@GetMapping("/board/modifyBoard")
+	public String modifyBoard(Model model, @RequestParam(name = "boardNo") int boardNo) {
+		//boardNo 선언
+		Board board = new Board();
+		board.setBoardNo(boardNo);
+		board=boardService.boardOne(board);
+		
+		model.addAttribute("board", board);
+		return"/board/modifyBoard";
+	}
+	
+	//게시글 수정 액션
+	@PostMapping("/board/modifyBoard")
+
+	public String modifyBoard(
+								@RequestParam(name = "boardNo") int boardNo,
+								@RequestParam(name = "localName") String localName,
+								@RequestParam(name = "boardTitle") String boardTitle,
+								@RequestParam(name = "boardContent") String boardContent,
+								@RequestParam(name = "memberId") String memberId
+								
+	) {
+		Board board = new Board();
+		board.setBoardNo(boardNo);
+		board.setLocalName(localName);
+		board.setBoardTitle(boardTitle);
+		board.setBoardContent(boardContent);
+		board.setMemberId(memberId);
+		
+		int row = boardService.modifyBoard(board);
+
+		return "redirect:/board/boardOne?boardNo=" + boardNo;
+		
+	}
+	
 	
 	//게시글 상세 보기
 	@GetMapping("/board/boardOne")
-	public String boardOne(Model model, @RequestParam(value = "boardNo") int boardNo) {
+	public String boardOne(Model model, @RequestParam(name = "boardNo") int boardNo) {
+		//boardNo 선언
 		Board board = new Board();
 		board.setBoardNo(boardNo);
 		board = boardService.boardOne(board);
@@ -31,13 +100,13 @@ public class BoardController {
 	}
 	
 	
-	//폼
+	//게시글 추가 폼
 	@GetMapping("/board/addBoard")
 	public String addBoard() {
 		return"/board/addBoard";
 	}
 	
-	//액션
+	//게시글 추가 액션
 	//커맨드 객체
 	@PostMapping("/board/addBoard")
 	public String addBoard(Board board) {

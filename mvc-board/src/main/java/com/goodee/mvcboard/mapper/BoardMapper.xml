@@ -16,17 +16,19 @@
 	
 	</select>
 	
-	<delete id="deleteBoard" parameterType="com.goodee.mvcboard.vo.Board">
+	<delete id="removeBoard" parameterType="com.goodee.mvcboard.vo.Board">
 		DELETE FROM board
 		WHERE board_no= #{boardNo}
 		AND member_id=#{memberId}
 	</delete>
 	
-	<update id="updateBoard" parameterType="com.goodee.mvcboard.vo.Board">
+	<update id="modifyBoard" parameterType="com.goodee.mvcboard.vo.Board">
 		UPDATE board
-		SET board_title =#{boardTitle},
-			board_content=#{boardContent}
-		WHERE board_no=#{boardNo}
+		SET local_name =#{localName},
+			board_title =#{boardTitle},
+			board_content=#{boardContent},
+			updatedate = NOW()
+		WHERE board_no = #{boardNo}
 		AND member_id=#{memberId}
 	</update>
 
