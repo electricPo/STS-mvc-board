@@ -9,6 +9,9 @@ import com.goodee.mvcboard.vo.Board;
 
 @Mapper
 public interface BoardMapper {
+	//boardOne
+	Board boardOne(Board board);
+	
 	//delete문
 	int deleteBoard(Board board);
 	

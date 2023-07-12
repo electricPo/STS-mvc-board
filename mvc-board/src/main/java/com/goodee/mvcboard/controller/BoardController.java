@@ -18,7 +18,19 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-
+	
+	//게시글 상세 보기
+	@GetMapping("/board/boardOne")
+	public String boardOne(Model model, @RequestParam(value = "boardNo") int boardNo) {
+		Board board = new Board();
+		board.setBoardNo(boardNo);
+		board = boardService.boardOne(board);
+		
+		model.addAttribute("board", board);
+		return "/board/boardOne";
+	}
+	
+	
 	//폼
 	@GetMapping("/board/addBoard")
 	public String addBoard() {
@@ -36,14 +48,18 @@ public class BoardController {
 	
 	@GetMapping("/board/boardList")
 	//@RequestParam 형변환, null값 선언 안해도 된다
-	public String boardList(Model model, @RequestParam(value = "currentPage", defaultValue = "1") int currentPage
-										,@RequestParam(value = "rowPerPage", defaultValue = "10") int rowPerPage) { //Model 타입을 쓰는 이유 -> 리퀘스트와 생명주기를 같이 한다
-		Map<String, Object> resultMap = boardService.getBoardList(currentPage, rowPerPage);
+	public String boardList(Model model, @RequestParam(name = "currentPage", defaultValue = "1") int currentPage
+										,@RequestParam(name = "rowPerPage", defaultValue = "10") int rowPerPage
+										,@RequestParam(name = "localName" , required = false) String localName) { //Model 타입을 쓰는 이유 -> 리퀘스트와 생명주기를 같이 한다
+		System.out.println("\u001B[46m" + "localName :" + localName + "\u001B[0m");
+		
+		Map<String, Object> resultMap = boardService.getBoardList(currentPage, rowPerPage, localName);
 		
 		//view로 넘길 때는 다시 분리해서
 		model.addAttribute("localNameList", resultMap.get("localNameList"));
 		model.addAttribute("boardList", resultMap.get("boardList"));
 		model.addAttribute("lastPage", resultMap.get("lastPage"));
+		model.addAttribute("localName", resultMap.get("localName"));
 		model.addAttribute("currentPage", resultMap.get("currentPage"));
 		return "/board/boardList";
 	}

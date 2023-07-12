@@ -16,6 +16,11 @@ import com.goodee.mvcboard.vo.Board;
 public class BoardService {
 	@Autowired
 	private BoardMapper boardMapper; //boardservice의 필드값을 채운다
+	//게시글 상세보기
+	public Board boardOne(Board board) {
+		return boardMapper.boardOne(board);
+	}
+	
 	//게시글 수정
 	public int updateBoard(Board board) {
 		return boardMapper.updatedBoard(board);
@@ -31,7 +36,7 @@ public class BoardService {
 		return boardMapper.insertBoard(board);
 	}
 	//페이징
-	public Map<String, Object> getBoardList(int currentPage, int rowPerPage){
+	public Map<String, Object> getBoardList(int currentPage, int rowPerPage, String localName){
 		
 		//service layer의 역할 1 : 컨트롤러가 넘겨준 매개값을 dao의 매개값에 맞게 가공한다
 		int beginRow = (currentPage-1)*rowPerPage;
@@ -41,6 +46,7 @@ public class BoardService {
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		paramMap.put("beginRow", beginRow);
 		paramMap.put("rowPerPage", rowPerPage);
+		paramMap.put("localName", localName);
 		//반환값 2
 		List<Board>boardList = boardMapper.selectBoardListByPage(paramMap);
 		Map<String, Object> resultMap = new HashMap<String, Object>();

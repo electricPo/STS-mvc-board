@@ -14,7 +14,7 @@
 	
 	<div>
 		<c:forEach var="m" items="${localNameList}"> <!--형변환이 자동으로 들어간다  -->
-			<a href="">${m.localName}(${m.cnt})</a>
+			<a href="/board/boardList?localName=${m.localName}">${m.localName}(${m.cnt})</a>
 		</c:forEach>
 	</div>
 	<table border="1">

@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goodee.mvcboard.mapper.BoardMapper">
-	<!-- 
-	<delete id="insertBoard" parameterType="com.goodee.mvcboard.vo.Board">
+	
+	<select id="boardOne" resultType="com.goodee.mvcboard.vo.Board" parameterType="com.goodee.mvcboard.vo.Board">
+		SELECT
+			board_no boardNo,
+			local_name localName,
+			board_title boardTitle,
+			board_content boardContent,
+			member_id memberId,
+			createdate,
+			updatedate
+		FROM board
+		WHERE board_no = #{boardNo}
+	
+	</select>
+	
+	<delete id="deleteBoard" parameterType="com.goodee.mvcboard.vo.Board">
 		DELETE FROM board
 		WHERE board_no= #{boardNo}
 		AND member_id=#{memberId}
@@ -15,7 +29,7 @@
 		WHERE board_no=#{boardNo}
 		AND member_id=#{memberId}
 	</update>
-	 -->
+
 	<insert id="insertBoard" parameterType="com.goodee.mvcboard.vo.Board">
 		INSERT INTO board(
 			local_name,
@@ -25,7 +39,7 @@
 			createdate,
 			updatedate
 		)VALUES(
-			#{localName}, <!-- Board.getLocalName -->
+			#{localName},
 			#{boardTitle},
 			#{boardContent},
 			#{memberId},
@@ -34,7 +48,6 @@
 		)
 
 	</insert>
-	
 	
 	<select id="selectLocalNameList" resultType="java.util.Map">
 		SELECT local_name localName, count(*) cnt
@@ -50,6 +63,11 @@
 			member_id memberId,
 			createdate
 		FROM board
+		<where>
+			<if test="localName != null">
+				local_name = #{localName}
+			</if>
+		</where>
 		ORDER BY createdate DESC
 		LIMIT #{beginRow}, #{rowPerPage}
 	</select>
