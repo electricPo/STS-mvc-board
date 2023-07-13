@@ -26,6 +26,14 @@
 			<td>${b.boardContent}</td>
 		</tr>
 		<tr>
+			<td>saveFilename</td>
+		<c:forEach var="file" items="${b.multipartFile}">
+			<td>
+                     <img src="${pageContext.request.contextPath}/upload/${file.saveFilename}" alt="이미지">
+            </td>
+        </c:forEach>
+        </tr>
+		<tr>
 			<td>member_id</td>
 			<td>${b.memberId}</td>
 		</tr>

@@ -33,6 +33,11 @@
 	</update>
 
 	<insert id="insertBoard" parameterType="com.goodee.mvcboard.vo.Board">
+		<selectKey order="AFTER" keyProperty="boardNo" resultType="integer">
+		<!-- order="AFTER"  키가 반환되고 난 후에 -->
+		<!-- 인서트 -> board_no 넘겨줌 -> 매개변수 호출해 채움 -->
+			SELECT last_insert_id()
+		</selectKey>
 		INSERT INTO board(
 			local_name,
 			board_title,

@@ -1,5 +1,9 @@
 package com.goodee.mvcboard.vo;
 
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -11,4 +15,7 @@ public class Board {
 	private String memberId;
 	private String createdate;
 	private String updatedate;
+	
+	//MultipartFile
+	private List<MultipartFile> multipartFile;
 }

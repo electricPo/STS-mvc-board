@@ -9,7 +9,7 @@
 </head>
 <body>
 	<h1>게시글 입력</h1>
-	<form action="${pageContext.request.contextPath}/board/addBoard" method="post">
+	<form action="${pageContext.request.contextPath}/board/addBoard" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>player</th>
@@ -26,10 +26,14 @@
 			<tr>
 				<th>boardContent</th>
 				<td>
-					<textarea row="3" cols="50"></textarea>
+					<textarea row="3" cols="50" name="boardContent"></textarea>
 				</td>
 			</tr>
+			<!-- fileUpload -->
 			<tr>
+				<td>파일 업로드</td>
+				<td><input type="file" name="multipartFile"></td>
+			</tr>
 				<th>memberId</th>
 				<td>
 					<input type="text" name="memberId">

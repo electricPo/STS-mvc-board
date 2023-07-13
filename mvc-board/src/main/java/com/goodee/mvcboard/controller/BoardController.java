@@ -1,15 +1,17 @@
 package com.goodee.mvcboard.controller;
 
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.goodee.mvcboard.service.BoardService;
 import com.goodee.mvcboard.vo.Board;
@@ -20,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BoardController {
 	@Autowired
 	private BoardService boardService;
-	//게시긁 삭제 폼
+	//게시글 삭제 폼
 	@GetMapping("board/removeBoard")
 	public String removeBoard(Model model,
 								@RequestParam(name = "boardNo") int boardNo) {
@@ -109,8 +111,12 @@ public class BoardController {
 	//게시글 추가 액션
 	//커맨드 객체
 	@PostMapping("/board/addBoard")
-	public String addBoard(Board board) {
-		int row = boardService.addBoard(board);
+	public String addBoard(HttpServletRequest request, Board board) { //매개값 리퀘스트 객체
+		String path = request.getServletContext().getRealPath("/upload/");
+		
+		int row = boardService.addBoard(board, path);
+		
+		log.debug("\u001B[46m" + "File path: " + path + "\u001B[0m");
 		log.debug("\u001B[46m" + "row :" + row + "\u001B[0m");
 		return "redirect:/board/boardList";
 	}

@@ -15,7 +15,7 @@ public interface BoardMapper {
 	//delete문
 	int removeBoard(Board board);
 	
-	//delete문
+	//modify문
 	int modifyBoard(Board board);
 	
 	//insert문
