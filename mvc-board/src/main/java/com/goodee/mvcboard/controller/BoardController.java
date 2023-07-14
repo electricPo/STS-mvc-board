@@ -92,13 +92,12 @@ public class BoardController {
 	//게시글 상세 보기
 	@GetMapping("/board/boardOne")
 	public String boardOne(Model model, @RequestParam(name = "boardNo") int boardNo) {
-		//boardNo 선언
-		Board board = new Board();
-		board.setBoardNo(boardNo);
-		board = boardService.boardOne(board);
-		
-		model.addAttribute("board", board);
-		return "/board/boardOne";
+	    Board board = new Board();
+	    board.setBoardNo(boardNo);
+	    board = boardService.boardOne(board);
+	    
+	    model.addAttribute("board", board);
+	    return "/board/boardOne";
 	}
 	
 	

@@ -24,6 +24,15 @@ public class BoardService {
 	private BoardMapper boardMapper; //boardservice의 필드값을 채운다
 	@Autowired
 	private BoardfileMapper boardfileMapper;
+	
+	//REST API chart 호출
+	public List<Map<String, Object>>getLocalNameList(){
+		
+		return boardMapper.selectLocalNameList();
+	}
+	
+	
+	
 	//게시글 상세보기
 	public Board boardOne(Board board) {
 		
@@ -51,7 +60,7 @@ public class BoardService {
 		List<MultipartFile>filelist=board.getMultipartFile();
 		if(row == 1 && filelist != null && filelist.size()>0) {
 			int boardNo = board.getBoardNo();
-			
+	
 			//Boardfile은 addboard에서 쓰이는 지역객체, 여러개가 만들어지기도 하니까 주입하지 않고 new 연산자로 만든다
 			//Boardfile boardfile = new Boardfile();
 			//boardfileMapper.insertBoardfile(boardfile);
