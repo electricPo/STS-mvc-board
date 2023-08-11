@@ -7,9 +7,12 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>kgc pro volleyball team</h1>
+	<h1>home</h1>
 	<div>
-		<a href="/board/boardList">fan board</a>
+		<a href="/board/boardList">board</a>
+	</div>
+	<div>
+		<a href="/login">로그인</a>
 	</div>
 </body>
 </html>

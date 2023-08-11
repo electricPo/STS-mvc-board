@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	<mapper namespace="com.goodee.mvcboard.mapper.LoginMapper">
+	
+    <select id="selectMemberById" parameterType="com.goodee.mvcboard.vo.Member" resultType="com.goodee.mvcboard.vo.Member">
+        SELECT 
+        id
+        FROM id_list 
+        <where>
+        	id = #{id} 
+        	AND pw = #{pw}
+        </where> 
+    </select>
+
+</mapper>
