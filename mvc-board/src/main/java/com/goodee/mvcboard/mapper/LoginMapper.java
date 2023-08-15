@@ -9,5 +9,6 @@ import com.goodee.mvcboard.vo.Member;
 public interface LoginMapper {
 	//로그인
 	Member selectMemberById(Member member);
+	//Member 객체를 파라미터로 받아 회원정보를 db에서 조회
     
 }

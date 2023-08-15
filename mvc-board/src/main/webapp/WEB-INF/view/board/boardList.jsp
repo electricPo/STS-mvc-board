@@ -1,45 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<!-- css파일 -->
-	<link href="<%=request.getContextPath() %>/style.css" type="text/css" rel="stylesheet">
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<!-- jQuery library -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<!-- Chart.js cdn -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<title>FANDOM WITH FANS</title>
+<jsp:include page="/layout/cdn.jsp"></jsp:include>
 </head>
-<style>
-	.body {
-		margin: 0 auto;
-        font-size: 1rem; 
-        font-weight: 500;
-        line-height: inherit;
-        color: #212529;
-        text-align: center;
-        background-color: #fff;
-	}
-	table {
-        margin: 5% auto;
-        width: 100%;
-        border-collapse: collapse;
-    }
-    th, td {
-        padding: 8px;
-        border: 1px solid #ddd;
-    }
-    tr:hover {
-        background-color: #f2f2f2;
-    }
 
-</style>
 <body class="body">
 	<h1>FANDOM WITH FANS</h1>
+	<div>
+		<a href="/home">home</a>
+	</div>
 	<div>
 		<a href="/board/addBoard">게시글 입력</a>
 	</div>

@@ -19,13 +19,15 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class LoginController {
-	@Autowired private LoginService loginService;
+	@Autowired 
+	private LoginService loginService;
 	
 	//로그인 페이지로 이동
 	@GetMapping("/login")
-	public String login(HttpServletRequest request) {
+	public String login() {
 		return "/login";
 	}
+	
 	//로그인 액션
 	@PostMapping("/login")
 	public String login(HttpServletRequest request,
@@ -43,17 +45,20 @@ public class LoginController {
 		}
 		//로그인 성공 : session 에 로그인 정보 저장
 		log.debug("로그인 성공");
+		log.debug(loginMember+"<-loginMember / LoginController");
 		HttpSession session = request.getSession();
 		session.setAttribute("loginMember", loginMember);
-
-		return "redirect:/board/boardList";
+		log.debug(session+"<-session / LoginController");
+		return "redirect:/home";
 		
 		
 		}
+	
 	//로그아웃 액션
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
-		session.invalidate();
-		return "/login";
+        session.invalidate();
+        //로컬스토리지로부터 저장된 id 제거
+        return "redirect:/login";
 	}
 }
