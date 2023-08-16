@@ -2,6 +2,7 @@
 package com.goodee.mvcboard.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class LoginController {
 		return "/login";
 	}
 	
+
 	//로그인 액션
 	@PostMapping("/login")
 	public String login(HttpServletRequest request,

@@ -80,28 +80,8 @@
             rememberCheck.checked = true;
         }
 
-        // 로컬스토리지 아이디 저장 체크박스
-        // 로그인 버튼 클릭시 ajax로 아이디와 패스워드를 보내 db와 비교(매퍼, 서비스) 다시 불러와서(id pw비교) 로그인성공시 로컬 스토리지에 저장(success) 처리  
         
-        /* $('loginBtn').click(function(){
-        	let id = $('#id').val();
-        	let pw = $('#pw').val();
-        	$.ajax({
-        		url : ,
-        		type : 'post',
-        		data : {
-        			id : id,
-        			pw : pw
-        		},
-        		success : function(id){
-        			console.log('ajax성공');
-        			localstorage.setItem("loginId", id);
-        		},
-        		error : function(){
-        			console.log('ajax실패');
-        		}
-        	})
-        }) */
+        
         
 		rememberCheck.addEventListener("change", function () {
         	
@@ -110,8 +90,39 @@
             } else {
                 localStorage.removeItem("rememberedId");
             }
-        }); 
+        });
+        
+		// 로그인 버튼 클릭 시 AJAX 요청을 보내는 부분
+		// 로컬스토리지 아이디 저장 체크박스
+        // 로그인 버튼 클릭시 ajax로 아이디와 패스워드를 보내 db와 비교(매퍼, 서비스) 다시 불러와서(id pw비교) 로그인성공시 로컬 스토리지에 저장(success) 처리  
+        const loginBtn = document.getElementById("loginBtn");
+        loginBtn.addEventListener("click", function () {
+            const id = idInput.value;
+            const pw = pwInput.value;
+            
+            // AJAX 요청 보내기
+            fetch("/login", {
+                method: "POST",
+                body: JSON.stringify({ id: id, pw: pw }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    localStorage.setItem("rememberedId", id);
+                    window.location.href = "/home"; // 로그인 성공 시 홈으로 이동
+                } else {
+                    alert("로그인 실패");
+                }
+            })
+            .catch(error => {
+                console.error("로그인 요청 에러:", error);
+            });
+        });
     });
+
 </script>
 
     <div class=" container login-wrapper">

@@ -34,19 +34,19 @@ public class LoginInterceptor implements HandlerInterceptor {
     }
         
     
-    @Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-    	
-    	HttpSession session = request.getSession();
-    	if (session.getAttribute("loginMember") != null) {
-    		// 로그인된 사용자일 경우, 모델에 로그인된 아이디를 추가
-    		// 세션에 로그인 정보가 있다면, 해당 로그인 정보를 모델에 추가하여 화면에서 활용할 수 있도록 함
-            modelAndView.addObject("id", session.getAttribute("loginMember"));
-        }
-    	// 다음 인터셉터나 컨트롤러로 요청을 전달
-        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
-    }
+//    @Override
+//	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+//			ModelAndView modelAndView) throws Exception {
+//    	
+//    	HttpSession session = request.getSession();
+//    	if (session.getAttribute("loginMember") != null) {
+//    		// 로그인된 사용자일 경우, 모델에 로그인된 아이디를 추가
+//    		// 세션에 로그인 정보가 있다면, 해당 로그인 정보를 모델에 추가하여 화면에서 활용할 수 있도록 함
+//            modelAndView.addObject("id", session.getAttribute("loginMember"));
+//        }
+//    	// 다음 인터셉터나 컨트롤러로 요청을 전달
+//        HandlerInterceptor.super.postHandle(request, response, handler, modelAndView);
+//    }
 }
   
 
